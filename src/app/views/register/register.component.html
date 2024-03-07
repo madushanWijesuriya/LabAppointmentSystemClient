@@ -1,93 +1,128 @@
 <!-- registration.component.html -->
 
-<div class="registration-container">
-  <mat-card class="registration-card">
-    <mat-card-header>
-      <mat-card-title>Registration</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form
-        [formGroup]="registrationForm"
-        (ngSubmit)="onSubmit()"
-        class="full-width"
-      >
-        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
-          <div fxFlex="50%">
-            <mat-form-field class="full-width">
-              <input
-                matInput
-                placeholder="User Name"
-                formControlName="userName"
-              />
-            </mat-form-field>
+<div class="flex items-center justify-center min-h-screen dark:bg-gray-900">
+  <div class="registration-container p-6">
+    <mat-card class="registration-card bg-white dark:bg-gray-800 text-white">
+      <mat-card-header>
+        <mat-card-title class="text-2xl font-bold">Registration</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form
+          [formGroup]="registrationForm"
+          (ngSubmit)="onSubmit()"
+          class="full-width"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <mat-form-field class="w-full">
+                <input
+                  matInput
+                  placeholder="User Name"
+                  formControlName="userName"
+                  class="w-full p-2 border rounded-md"
+                />
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="w-full">
+                <input
+                  matInput
+                  placeholder="Email"
+                  formControlName="email"
+                  class="w-full p-2 border rounded-md"
+                />
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="w-full">
+                <input
+                  matInput
+                  placeholder="Phone Number"
+                  formControlName="phoneNumber"
+                  class="w-full p-2 border rounded-md"
+                />
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="w-full">
+                <input
+                  matInput
+                  placeholder="NIC"
+                  formControlName="nic"
+                  class="w-full p-2 border rounded-md"
+                />
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="w-full">
+                <input
+                  matInput
+                  placeholder="Name"
+                  formControlName="name"
+                  class="w-full p-2 border rounded-md"
+                />
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="w-full">
+                <input
+                  matInput
+                  placeholder="Address"
+                  formControlName="address"
+                  class="w-full p-2 border rounded-md"
+                />
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="w-full">
+                <mat-select
+                  placeholder="Gender"
+                  formControlName="gender"
+                  class="w-full p-2 border rounded-md"
+                >
+                  <mat-option value="Male">Male</mat-option>
+                  <mat-option value="Female">Female</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="w-full">
+                <input
+                  matInput
+                  type="password"
+                  placeholder="Password"
+                  formControlName="password"
+                  class="w-full p-2 border rounded-md"
+                />
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="w-full">
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  placeholder="Date of Birth"
+                  formControlName="dateOfBirth"
+                  class="w-full p-2 border rounded-md"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
           </div>
-          <div fxFlex="50%">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Email" formControlName="email" />
-            </mat-form-field>
-          </div>
-          <div fxFlex="50%">
-            <mat-form-field class="full-width">
-              <input
-                matInput
-                placeholder="Phone Number"
-                formControlName="phoneNumber"
-              />
-            </mat-form-field>
-          </div>
-          <div fxFlex="50%">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="NIC" formControlName="nic" />
-            </mat-form-field>
-          </div>
-          <div fxFlex="50%">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Name" formControlName="name" />
-            </mat-form-field>
-          </div>
-          <div fxFlex="50%">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Address" formControlName="address" />
-            </mat-form-field>
-          </div>
-          <div fxFlex="50%">
-            <mat-form-field class="full-width">
-              <mat-select placeholder="Gender" formControlName="gender">
-                <mat-option value="Male">Male</mat-option>
-                <mat-option value="Female">Female</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div fxFlex="50%">
-            <mat-form-field class="full-width">
-              <input
-                matInput
-                type="password"
-                placeholder="Password"
-                formControlName="password"
-              />
-            </mat-form-field>
-          </div>
-          <div fxFlex="50%">
-            <mat-form-field class="full-width">
-              <input
-                matInput
-                [matDatepicker]="picker"
-                placeholder="Date of Birth"
-                formControlName="dateOfBirth"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div>
-        </div>
-        <button mat-raised-button color="primary" type="submit">
-          Register
-        </button>
-      </form>
-    </mat-card-content>
-  </mat-card>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded-md dark:bg-blue-800"
+          >
+            Register
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -8,6 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   registrationForm!: FormGroup;
+  private authService = inject(AuthService);
+  private localStorageService = inject(LocalStorageService);
 
   constructor(private fb: FormBuilder) {}
 
@@ -35,8 +39,11 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.registrationForm.valid) {
-      console.log(this.registrationForm.value);
-      // You can send the form data to your backend API here
+      this.authService
+        .register(this.registrationForm.value)
+        .subscribe((response: any) => {
+          this.localStorageService.setToken(response?.token);
+        });
     }
   }
 }
