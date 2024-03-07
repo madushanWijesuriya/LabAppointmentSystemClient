@@ -25,6 +25,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 /**
  * NgModule that includes all Material modules.
@@ -58,6 +59,7 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatInputModule,
     FormsModule,
+    MatDatepickerModule,
   ],
 })
 export class MaterialModule {}

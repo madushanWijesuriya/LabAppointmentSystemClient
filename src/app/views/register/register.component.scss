@@ -1,0 +1,29 @@
+/* registration.component.css */
+
+.registration-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.registration-card {
+  width: 400px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Make sure each item takes up 50% of the row */
+div[fxLayout] {
+  flex-wrap: wrap;
+}
+
+div[fxLayout] > div {
+  box-sizing: border-box;
+}
