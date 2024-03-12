@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
-const tokenKey = 'labAppointmentToken';
+import { TOKEN_KEY } from '../constants/global-constants';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocalStorageService {
-
   getToken(): string | null {
-    return localStorage.getItem(tokenKey);
+    return localStorage.getItem(TOKEN_KEY);
   }
 
   setToken(token: string): void {
-    localStorage.setItem(tokenKey, token);
+    localStorage.setItem(TOKEN_KEY, token);
   }
 
   removeToken(): void {
-    localStorage.removeItem(tokenKey);
+    localStorage.removeItem(TOKEN_KEY);
   }
 }

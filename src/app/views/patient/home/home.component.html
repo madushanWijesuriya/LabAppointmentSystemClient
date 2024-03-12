@@ -1,0 +1,90 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 h-screen p-4">
+  <!-- Card: Create Appointment -->
+  <div
+    class="card bg-blue-100 border border-blue-300 rounded-md p-4 overflow-y-auto"
+  >
+    <div
+      class="flex items-center flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4"
+    >
+      <div class="flex-shrink-0">
+        <svg
+          class="w-8 h-8 text-blue-500"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zM11 7h2v5h5v2h-5v5h-2v-5H6v-2h5V7z"
+          ></path>
+        </svg>
+      </div>
+      <div class="text-center md:text-left">
+        <h3 class="text-lg font-semibold text-blue-800">Create Appointment</h3>
+        <p class="text-blue-600">Schedule a new appointment here</p>
+      </div>
+    </div>
+    <div class="mt-4">
+      <app-create></app-create>
+    </div>
+  </div>
+
+  <!-- Card: View Appointment Details -->
+  <div
+    class="card bg-yellow-100 border border-yellow-300 rounded-md p-4 overflow-y-auto"
+  >
+    <div class="flex items-center space-x-4">
+      <svg
+        class="w-8 h-8 text-yellow-500"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path d="M21 21l-6-6"></path>
+        <path d="M3 21l6-6"></path>
+        <path d="M9 3l6 6"></path>
+      </svg>
+      <div>
+        <h3 class="text-lg font-semibold text-yellow-800">
+          View Appointment Details
+        </h3>
+        <p class="text-yellow-600">
+          Explore details of your scheduled appointments
+        </p>
+      </div>
+    </div>
+    <div class="mt-4">
+      <app-list></app-list>
+    </div>
+  </div>
+
+  <!-- Card: View Test Reports -->
+  <div
+    class="card bg-purple-100 border border-purple-300 rounded-md p-4 overflow-y-auto"
+  >
+    <div class="flex items-center space-x-4">
+      <svg
+        class="w-8 h-8 text-purple-500"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zM11 7h2v5h5v2h-5v5h-2v-5H6v-2h5V7z"
+        ></path>
+      </svg>
+      <div>
+        <h3 class="text-lg font-semibold text-purple-800">View Test Reports</h3>
+        <p class="text-purple-600">Check your medical test reports here</p>
+      </div>
+    </div>
+  </div>
+</div>

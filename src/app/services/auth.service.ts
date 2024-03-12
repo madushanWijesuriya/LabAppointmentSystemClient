@@ -1,38 +1,51 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LocalStorageService } from './local-storage.service';
+import { BaseService } from './base.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { TOKEN_KEY } from '../constants/global-constants';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
-  private apiUrl = 'https://localhost:7228/api';
-  private http = inject(HttpClient);
-  private localStorageService = inject(LocalStorageService);
-
-  private getHeaders(): HttpHeaders {
-    const token = this.localStorageService.getToken();
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    });
+export class AuthService extends BaseService {
+  constructor(private jwtHelper: JwtHelperService) {
+    super();
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem(TOKEN_KEY);
   }
 
   isTokenExpired(): Observable<boolean> {
-    const headers = this.getHeaders();
-
     return this.http.get<boolean>(`${this.apiUrl}/Auth/CheckToken`, {
-      headers,
+      headers: this.requestHeaders(),
     });
   }
 
-  clearToken(): void {
-    localStorage.removeItem('token');
+  getRolesFromToken(): string {
+    const token = this.getToken();
+
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      console.log(
+        decodedToken[
+          'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+        ]
+      );
+
+      return (
+        decodedToken[
+          'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+        ] || ''
+      );
+    }
+
+    return '';
+  }
+
+  hasRole(role: string[]): boolean {
+    const userRoles = this.getRolesFromToken();
+    return role.includes(userRoles);
   }
 
   login(data: any): Observable<string> {

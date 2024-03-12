@@ -9,3 +9,18 @@ body {
   margin: 0 auto; /* Center the container horizontally */
   padding: 20px; /* Add some padding to the container */
 }
+
+::ng-deep .success-snackbar {
+  background-color: #4caf50; /* Green */
+  color: #ffffff; /* White text for contrast */
+}
+
+::ng-deep .error-snackbar {
+  background-color: #f44336; /* Red */
+  color: #ffffff; /* White text for contrast */
+}
+
+::ng-deep .warning-snackbar {
+  background-color: #ff9800; /* Orange */
+  color: #ffffff; /* White text for contrast */
+}

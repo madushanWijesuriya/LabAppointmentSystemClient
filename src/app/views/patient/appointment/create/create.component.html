@@ -1,0 +1,39 @@
+<!-- Your app-create.component.html -->
+
+<form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="w-full">
+  <!-- Date -->
+  <div class="mb-4">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="datePicker"
+        formControlName="date"
+        min="{{ minDate }}"
+        class="w-full"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="datePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <!-- Time -->
+  <div class="mb-4">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Time</mat-label>
+      <mat-select formControlName="time" class="w-full">
+        <mat-option *ngFor="let hour of timeSlots" [value]="hour">
+          {{ hour }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Submit Button -->
+  <button mat-raised-button color="primary" type="submit" class="w-full">
+    Create Appointment
+  </button>
+</form>

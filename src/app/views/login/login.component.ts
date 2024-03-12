@@ -50,7 +50,12 @@ export class LoginComponent implements OnInit {
       const { username, password } = this.form.value;
       this.authService.login(this.form.value).subscribe((response: any) => {
         this.localStorageService.setToken(response?.token);
-        this.router.navigate(['/home']);
+        const role = this.authService.getRolesFromToken();
+        if (role === 'Patient') {
+          this.router.navigate(['/home']);
+        } else {
+          this.router.navigate(['/staff/appointments']);
+        }
       });
     }
   }
