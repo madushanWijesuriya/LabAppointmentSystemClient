@@ -19,7 +19,7 @@ export class BaseService {
   };
 
   clearToken(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('labAppointmentToken');
   }
 
   protected getParams = (oDataParams: any) => {

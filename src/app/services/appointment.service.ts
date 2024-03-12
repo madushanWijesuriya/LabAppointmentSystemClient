@@ -19,4 +19,10 @@ export class AppointmentService extends BaseService {
       params: this.getParams(oDataParams),
     });
   }
+
+  update(id: string, data: any): Observable<any> {
+    return this.http.put<string>(`${this.apiUrl}/Appointments/${id}`, data, {
+      headers: this.requestHeaders(),
+    });
+  }
 }

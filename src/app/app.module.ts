@@ -16,9 +16,10 @@ import { DatePipe } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { EditComponent } from './views/staff/admin/appointment/edit/edit.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdminListComponent } from './views/staff/admin/appointment/list/list.component';
+import { AppointmentViewComponent } from './views/staff/admin/appointment/appointment-view/appointment-view.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -29,8 +30,8 @@ import { AdminListComponent } from './views/staff/admin/appointment/list/list.co
     CreateComponent,
     ListComponent,
     DetailsComponent,
-    EditComponent,
     AdminListComponent,
+    AppointmentViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +42,7 @@ import { AdminListComponent } from './views/staff/admin/appointment/list/list.co
     ReactiveFormsModule,
     MatSnackBarModule,
     MatTableModule,
+    MatPaginatorModule,
     MatIconModule,
     JwtModule.forRoot({
       config: {
@@ -55,5 +57,5 @@ import { AdminListComponent } from './views/staff/admin/appointment/list/list.co
 export class AppModule {}
 
 export function tokenGetter() {
-  return localStorage.getItem('token');
+  return localStorage.getItem('labAppointmentToken');
 }

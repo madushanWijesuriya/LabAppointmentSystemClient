@@ -1,0 +1,71 @@
+<div class="p-10">
+  <h1>Edit Appointment</h1>
+  <form
+    [formGroup]="appointmentForm"
+    (ngSubmit)="onSubmit()"
+    class="w-full max-w-lg mx-auto mt-8"
+  >
+    <!-- Date -->
+    <div class="mb-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="datePicker"
+          formControlName="date"
+          min="{{ minDate }}"
+          class="w-full"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="datePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <!-- Time -->
+    <div class="mb-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Time</mat-label>
+        <mat-select formControlName="time" class="w-full">
+          <mat-option *ngFor="let hour of timeSlots()" [value]="hour">
+            {{ hour }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Workflow</mat-label>
+        <mat-select formControlName="workFlow">
+          <mat-option
+            *ngFor="let appStatus of appointmentStatuses; let i = index"
+            [value]="i"
+          >
+            {{ appStatus }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="mb-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option
+            *ngFor="let status of statuses; let i = index"
+            [value]="i"
+          >
+            {{ status }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" type="submit" class="w-full">
+      Update
+    </button>
+  </form>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
   private localStorageService = inject(LocalStorageService);
+  @Output() loginSuccess: EventEmitter<void> = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.initLoginForm();
@@ -56,6 +57,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.router.navigate(['/staff/appointments']);
         }
+        this.loginSuccess.emit();
       });
     }
   }

@@ -1,4 +1,4 @@
-@if(role() != 'Patient') {
+@if(role() && role() != 'Patient') {
 <button
   data-drawer-target="default-sidebar"
   data-drawer-toggle="default-sidebar"
@@ -188,4 +188,6 @@
 </aside>
 }
 
-<router-outlet />
+<ng-container>
+  <router-outlet (loginSuccess)="handleLoginSuccess()" />
+</ng-container>

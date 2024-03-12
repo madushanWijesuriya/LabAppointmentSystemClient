@@ -13,4 +13,8 @@ export class AppComponent {
   constructor() {
     this.role.set(this.authService.getRolesFromToken());
   }
+
+  handleLoginSuccess(): void {
+    console.log('Login successful in the child component');
+  }
 }
