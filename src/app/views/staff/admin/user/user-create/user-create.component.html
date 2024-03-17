@@ -1,0 +1,98 @@
+<div class="p-10">
+  <h1 class="mb-8">Create User</h1>
+  <form
+    [formGroup]="inputForm"
+    (ngSubmit)="onSubmit()"
+    class="grid grid-cols-2 gap-6"
+  >
+    <!-- Username -->
+    <div class="col-span-2 sm:col-span-1">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="userName" class="w-full" />
+      </mat-form-field>
+    </div>
+
+    <!-- Email -->
+    <div class="col-span-2 sm:col-span-1">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" class="w-full" />
+      </mat-form-field>
+    </div>
+
+    <!-- Phone Number -->
+    <div class="col-span-2 sm:col-span-1">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phoneNumber" class="w-full" />
+      </mat-form-field>
+    </div>
+
+    <!-- NIC -->
+    <div class="col-span-2 sm:col-span-1">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>NIC</mat-label>
+        <input matInput formControlName="nic" class="w-full" />
+      </mat-form-field>
+    </div>
+
+    <!-- Name -->
+    <div class="col-span-2 sm:col-span-1">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" class="w-full" />
+      </mat-form-field>
+    </div>
+
+    <!-- Address -->
+    <div class="col-span-2 sm:col-span-1">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" class="w-full" />
+      </mat-form-field>
+    </div>
+
+    <!-- Gender -->
+    <div class="col-span-2 sm:col-span-1">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="Male">Male</mat-option>
+          <mat-option value="Female">Female</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Role -->
+    <div class="col-span-2 sm:col-span-1">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" class="w-full">
+          <mat-option *ngFor="let role of userRoles" [value]="role">{{
+            role
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Password -->
+    <div class="col-span-2 sm:col-span-1">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" class="w-full" />
+        <mat-hint
+          >Password must be at least 8 characters long and contain at least one
+          letter, one number, and one special character.</mat-hint
+        >
+      </mat-form-field>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="col-span-2">
+      <button mat-raised-button color="primary" type="submit" class="w-full">
+        Create
+      </button>
+    </div>
+  </form>
+</div>

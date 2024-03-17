@@ -20,7 +20,23 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AdminListComponent } from './views/staff/admin/appointment/list/list.component';
 import { AppointmentViewComponent } from './views/staff/admin/appointment/appointment-view/appointment-view.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-
+import { UserListComponent } from './views/staff/admin/user/user-list/user-list.component';
+import { UserCreateComponent } from './views/staff/admin/user/user-create/user-create.component';
+import { UserViewComponent } from './views/staff/admin/user/user-view/user-view.component';
+import { AssignTestComponent } from './views/staff/admin/test/assign-test/assign-test.component';
+import { NgxStripeModule } from 'ngx-stripe';
+import { PaymentFormComponent } from './components/payment-form/payment-form.component';
+import { ViewAppointmentTestComponent } from './views/staff/technician/view-appointment-test/view-appointment-test.component';
+import { UpdateAppointmentTestComponent } from './views/staff/technician/update-appointment-test/update-appointment-test.component';
+import { CKEditorModule } from 'ckeditor4-angular';
+import { NgxEditorModule } from 'ngx-editor';
+export const environment = {
+  production: false,
+  stripe: {
+    publicKey:
+      'pk_test_51OucOgBoaqreuNETZii1F9MkDkR5wckNFigkYdmIvVflw23JL3qgVvbLGzPXCHVmGqO26pKNzKwpIl2Y1uLGChyn00pUbVWe2g',
+  },
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +48,13 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     DetailsComponent,
     AdminListComponent,
     AppointmentViewComponent,
+    UserListComponent,
+    UserCreateComponent,
+    UserViewComponent,
+    AssignTestComponent,
+    PaymentFormComponent,
+    ViewAppointmentTestComponent,
+    UpdateAppointmentTestComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +73,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
         allowedDomains: ['*'],
       },
     }),
+    NgxStripeModule.forRoot(environment.stripe.publicKey),
+    NgxEditorModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

@@ -27,11 +27,6 @@ export class AuthService extends BaseService {
 
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
-      console.log(
-        decodedToken[
-          'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
-        ]
-      );
 
       return (
         decodedToken[

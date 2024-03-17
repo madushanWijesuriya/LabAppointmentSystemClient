@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppointmentService } from '../../../../services/appointment.service';
 import { NotificationService } from '../../../../services/notification.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create',
@@ -18,7 +19,7 @@ export class CreateComponent {
   private datePipe = inject(DatePipe);
   private notificationService = inject(NotificationService);
 
-  constructor() {
+  constructor(public dialogRef: MatDialogRef<CreateComponent>) {
     this.minDate = this.calculateMinDate();
     this.setupTimeSlots();
 
@@ -39,7 +40,7 @@ export class CreateComponent {
       formData.time = selectedTime;
       this.service.create(formData).subscribe((response) => {
         this.notificationService.showSuccess('Appointment created');
-        this.appointmentForm.reset();
+        this.dialogRef.close(true);
       });
     }
   }

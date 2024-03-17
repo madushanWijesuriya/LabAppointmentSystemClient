@@ -31,30 +31,20 @@
         <mat-header-cell *matHeaderCellDef>WorkFlow</mat-header-cell>
         <mat-cell *matCellDef="let appointment">
           <span
-            class="inline-block px-2 py-1 rounded-full text-sm font-semibold text-orange-500"
-            *ngIf="appointment.workFlow === 0"
-            >Pending</span
+            class="inline-block px-2 py-1 rounded-full text-sm font-semibold"
+            [ngClass]="getWorkflowClass(appointment.workFlow)"
           >
-          <span
-            class="inline-block px-2 py-1 rounded-full text-sm font-semibold text-green-500"
-            *ngIf="appointment.workFlow === 1"
-            >Verified</span
-          >
-          <span
-            class="inline-block px-2 py-1 rounded-full text-sm font-semiboldtext-blue-500"
-            *ngIf="appointment.workFlow === 2"
-            >Paid</span
-          >
-          <span
-            class="inline-block px-2 py-1 rounded-full text-sm font-semibold text-red-500"
-            *ngIf="appointment.workFlow === 3"
-            >Rejected</span
-          >
-          <span
-            class="inline-block px-2 py-1 rounded-full text-sm font-semibold text-gray-500"
-            *ngIf="appointment.workFlow === 4"
-            >Cancel</span
-          >
+            {{ appointment.workFlow === 0 ? "Created" : "" }}
+            {{ appointment.workFlow === 1 ? "Verified" : "" }}
+            {{ appointment.workFlow === 2 ? "Paid" : "" }}
+            {{ appointment.workFlow === 3 ? "Check In" : "" }}
+            {{ appointment.workFlow === 4 ? "Test Assigned" : "" }}
+            {{ appointment.workFlow === 5 ? "Test Completed" : "" }}
+            {{ appointment.workFlow === 6 ? "Result Out" : "" }}
+            {{ appointment.workFlow === 7 ? "Completed" : "" }}
+            {{ appointment.workFlow === 8 ? "Cancel" : "" }}
+            {{ appointment.workFlow === 9 ? "Rejected" : "" }}
+          </span>
         </mat-cell>
       </ng-container>
 
@@ -70,10 +60,27 @@
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell *matCellDef="let appointment">
           <button
-            class="rounded-full bg-blue-500 text-white px-4 py-2"
+            class="rounded-full bg-blue-500 text-white px-4 py-2 mr-1 sm"
             (click)="viewAppointment(appointment)"
           >
             View
+          </button>
+          <button
+            *ngIf="appointment.workFlow === appointmentStatus.CheckIn"
+            class="rounded-full bg-green-500 text-white px-4 py-2 sm"
+            (click)="assignTest(appointment)"
+          >
+            Assign Test
+          </button>
+          <button
+            *ngIf="
+              appointment.workFlow === appointmentStatus.TestAssigned &&
+              role === 'Technician'
+            "
+            class="rounded-full bg-green-500 text-white px-4 py-2 sm"
+            (click)="viewAppoinmentTests(appointment.id)"
+          >
+            View Test
           </button>
         </mat-cell>
       </ng-container>

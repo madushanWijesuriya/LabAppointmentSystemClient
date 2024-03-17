@@ -1,0 +1,59 @@
+<mat-table [dataSource]="dataSource" class="w-full">
+  <!-- ID Column -->
+  <ng-container matColumnDef="appointment">
+    <mat-header-cell *matHeaderCellDef>Appointment ID</mat-header-cell>
+    <mat-cell *matCellDef="let appointmentTest">{{
+      appointmentTest?.appointmentId
+    }}</mat-cell>
+  </ng-container>
+
+  <!-- Date Column -->
+  <ng-container matColumnDef="test">
+    <mat-header-cell *matHeaderCellDef>Test Name</mat-header-cell>
+    <mat-cell *matCellDef="let appointmentTest">{{
+      appointmentTest?.test?.name
+    }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="result">
+    <mat-header-cell *matHeaderCellDef>Result</mat-header-cell>
+    <mat-cell *matCellDef="let appointmentTest">
+      @if(appointmentTest.result) {
+      <span
+        class="bg-green-500 inline-block px-2 py-1 rounded-full text-sm font-semibold"
+      >
+        Updated
+      </span>
+      }@else {
+      <span
+        class="bg-yellow-500 inline-block px-2 py-1 rounded-full text-sm font-semibold"
+      >
+        Pending
+      </span>
+      }
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+    <mat-cell *matCellDef="let appointmentTest">
+      <button
+        class="rounded-full text-white px-4 py-2 mr-1 sm"
+        [ngClass]="{
+          'bg-blue-500': appointmentTest.result,
+          'bg-gray-500': !appointmentTest.result
+        }"
+        (click)="updateTestResult(appointmentTest)"
+      >
+        @if(appointmentTest.result) { Update Result }@else { Add Result }
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  showFirstLastButtons
+></mat-paginator>

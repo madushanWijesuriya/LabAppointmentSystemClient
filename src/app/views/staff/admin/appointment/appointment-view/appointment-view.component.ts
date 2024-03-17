@@ -6,10 +6,14 @@ import { DatePipe } from '@angular/common';
 import { NotificationService } from '../../../../../services/notification.service';
 
 export enum AppointmentStatus {
-  Pending,
+  Created,
   Verified,
   Paid,
-  Rejected,
+  CheckIn,
+  TestAssigned,
+  TestCompleted,
+  ResultOut,
+  Completed,
   Cancel,
 }
 
@@ -55,8 +59,6 @@ export class AppointmentViewComponent implements OnInit {
 
   ngOnInit(): void {
     const appointment = this.data.appointment;
-
-    console.log(appointment);
 
     const formattedTime = this.convertTimeFormat(appointment.formatedTime);
 

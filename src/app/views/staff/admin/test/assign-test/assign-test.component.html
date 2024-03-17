@@ -1,0 +1,39 @@
+<div class="p-10">
+  <h1>Assign Tests</h1>
+  <form
+    [formGroup]="appointmentForm"
+    (ngSubmit)="onSubmit()"
+    class="w-full max-w-lg mx-auto mt-8"
+  >
+    <!-- Test IDs -->
+    <div class="mb-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Test IDs</mat-label>
+        <mat-select formControlName="testIds" multiple class="w-full">
+          <mat-option *ngFor="let test of tests()" [value]="test?.id">
+            {{ test.name }} - (Rs.{{ test.price }})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Appointment ID -->
+    <div class="mb-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Appointment ID</mat-label>
+        <input
+          readonly="true"
+          matInput
+          formControlName="appointmentId"
+          class="w-full"
+          type="number"
+        />
+      </mat-form-field>
+    </div>
+
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" type="submit" class="w-full">
+      Assign
+    </button>
+  </form>
+</div>

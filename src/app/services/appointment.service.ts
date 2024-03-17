@@ -13,8 +13,8 @@ export class AppointmentService extends BaseService {
     });
   }
 
-  getAll(oDataParams?: ODataParams): Observable<any> {
-    return this.http.get<string>(`${this.apiUrl}/Appointments`, {
+  getAll(role = 'Admin', oDataParams?: ODataParams): Observable<any> {
+    return this.http.get<string>(`${this.apiUrl}/Appointments/${role}`, {
       headers: this.requestHeaders(),
       params: this.getParams(oDataParams),
     });
@@ -22,6 +22,12 @@ export class AppointmentService extends BaseService {
 
   update(id: string, data: any): Observable<any> {
     return this.http.put<string>(`${this.apiUrl}/Appointments/${id}`, data, {
+      headers: this.requestHeaders(),
+    });
+  }
+
+  assignTest(data: any): Observable<any> {
+    return this.http.post<string>(`${this.apiUrl}/Appointments/Tests`, data, {
       headers: this.requestHeaders(),
     });
   }

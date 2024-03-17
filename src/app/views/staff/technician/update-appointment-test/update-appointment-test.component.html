@@ -1,0 +1,24 @@
+<div class="p-10">
+  <h1>Appointment Test</h1>
+  <form [formGroup]="appointmentTestForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" formControlName="appointmentId" />
+    <input type="hidden" formControlName="testId" />
+    <input type="hidden" formControlName="result" value="" />
+
+    <!-- Date -->
+    <div class="mb-4 editor-container">
+      <div class="NgxEditor__Wrapper">
+        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+        <ngx-editor
+          [editor]="editor"
+          formControlName="result"
+          [placeholder]="'Type here...'"
+        ></ngx-editor>
+      </div>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" class="w-full">
+      Update Test Result
+    </button>
+  </form>
+</div>
