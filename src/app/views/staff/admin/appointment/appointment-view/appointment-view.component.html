@@ -13,13 +13,15 @@
           matInput
           [matDatepicker]="datePicker"
           formControlName="date"
-          min="{{ minDate }}"
-          class="w-full"
+          class="w-full cursor-not-allowed"
         />
+        @if(role === 'Reception' && this.data?.appointment?.workFlow === 0 ) {
         <mat-datepicker-toggle
           matSuffix
           [for]="datePicker"
         ></mat-datepicker-toggle>
+        }
+
         <mat-datepicker #datePicker></mat-datepicker>
       </mat-form-field>
     </div>
@@ -43,8 +45,9 @@
           <mat-option
             *ngFor="let appStatus of appointmentStatuses; let i = index"
             [value]="i"
+            [disabled]="appStatus.isDisabled"
           >
-            {{ appStatus }}
+            {{ appStatus.value }}
           </mat-option>
         </mat-select>
       </mat-form-field>

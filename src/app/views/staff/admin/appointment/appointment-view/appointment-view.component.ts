@@ -4,6 +4,7 @@ import { AppointmentService } from '../../../../../services/appointment.service'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from '../../../../../services/notification.service';
+import { AuthService } from '../../../../../services/auth.service';
 
 export enum AppointmentStatus {
   Created,
@@ -30,7 +31,8 @@ export enum Status {
 export class AppointmentViewComponent implements OnInit {
   appointmentForm!: FormGroup;
   timeSlots = signal<string[]>([]);
-  minDate: string;
+  // minDate: string;
+  role: string;
 
   private service = inject(AppointmentService);
   private fb = inject(FormBuilder);
@@ -38,15 +40,17 @@ export class AppointmentViewComponent implements OnInit {
   private notificationService = inject(NotificationService);
 
   statuses = Object.values(Status).filter((value) => typeof value === 'string');
-  appointmentStatuses = Object.values(AppointmentStatus).filter(
-    (value) => typeof value === 'string'
-  );
+  appointmentStatuses = Object.values(AppointmentStatus)
+    .filter((value) => typeof value === 'string')
+    .map((x) => ({ value: x, isDisabled: false }));
 
   constructor(
+    private auth: AuthService,
     public dialogRef: MatDialogRef<AppointmentViewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.minDate = this.calculateMinDate();
+    this.role = auth.getRolesFromToken();
+    // this.minDate = this.calculateMinDate();
     this.setupTimeSlots();
 
     this.appointmentForm = this.fb.group({
@@ -55,6 +59,20 @@ export class AppointmentViewComponent implements OnInit {
       workFlow: [0, Validators.required],
       status: [0, Validators.required],
     });
+
+    if (this.role === 'Reception' && this.data?.appointment?.workFlow !== 0) {
+      // this.appointmentForm.get('time')?.disable();
+      this.appointmentForm.get('date')?.disable();
+    } else if (this.role === 'Technician') {
+      // this.appointmentForm.get('time')?.disable();
+      this.appointmentForm.get('date')?.disable();
+      this.appointmentStatuses = this.appointmentStatuses.map((x) => {
+        return {
+          ...x,
+          isDisabled: x.value !== 'TestCompleted' && x.value !== 'TestAssigned',
+        };
+      });
+    }
   }
 
   ngOnInit(): void {
