@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,7 @@ export class RegisterComponent implements OnInit {
   registrationForm!: FormGroup;
   private authService = inject(AuthService);
   private localStorageService = inject(LocalStorageService);
+  private router = inject(Router);
 
   constructor(private fb: FormBuilder) {}
 
@@ -43,6 +45,7 @@ export class RegisterComponent implements OnInit {
         .register(this.registrationForm.value)
         .subscribe((response: any) => {
           this.localStorageService.setToken(response?.token);
+          this.router.navigate(['/']);
         });
     }
   }

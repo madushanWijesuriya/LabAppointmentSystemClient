@@ -113,6 +113,8 @@ export class AppointmentViewComponent implements OnInit {
   }
 
   private timeStringToDouble(timeString: string): number {
+    console.log(timeString);
+
     const [hours, minutes] = timeString.split(':').map(Number);
     return hours + minutes / 60;
   }
@@ -129,6 +131,13 @@ export class AppointmentViewComponent implements OnInit {
       const formData = this.appointmentForm.value;
       const selectedTime = this.timeStringToDouble(formData.time);
       formData.time = selectedTime;
+      const date = new Date(this.appointmentForm.get('date')?.value);
+
+      formData.time = selectedTime;
+      let localDate = new Date(
+        date?.getTime() - date?.getTimezoneOffset() * 60000
+      );
+      formData.date = localDate;
       this.service
         .update(this.data.appointment.id, formData)
         .subscribe((response) => {

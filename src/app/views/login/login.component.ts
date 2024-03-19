@@ -12,6 +12,7 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -33,12 +34,16 @@ export class LoginComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
   private localStorageService = inject(LocalStorageService);
+  private notificationService = inject(NotificationService);
   @Output() loginSuccess: EventEmitter<void> = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.initLoginForm();
   }
 
+  navigateReg() {
+    this.router.navigate(['/register']);
+  }
   private initLoginForm(): void {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -49,16 +54,17 @@ export class LoginComponent implements OnInit {
   login(): void {
     if (this.form.valid) {
       const { username, password } = this.form.value;
-      this.authService.login(this.form.value).subscribe((response: any) => {
-        this.localStorageService.setToken(response?.token);
-        const role = this.authService.getRolesFromToken();
-        if (role === 'Patient') {
-          this.router.navigate(['/home']);
-        } else {
-          this.router.navigate(['/staff/appointments']);
+      this.authService.login(this.form.value).subscribe(
+        (response: any) => {
+          this.localStorageService.setToken(response?.token);
+          this.router.navigate(['/']);
+        },
+        (error) => {
+          if (error.status === 401) {
+            this.notificationService.showError('Invalid username or password');
+          }
         }
-        this.loginSuccess.emit();
-      });
+      );
     }
   }
 }

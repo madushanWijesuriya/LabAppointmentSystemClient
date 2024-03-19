@@ -47,6 +47,10 @@ export class AuthService extends BaseService {
     return this.http.post<string>(`${this.apiUrl}/Auth/Login`, data);
   }
 
+  logout() {
+    this.clearToken();
+  }
+
   register(data: any): Observable<string> {
     return this.http.post<string>(`${this.apiUrl}/Auth/Register`, data);
   }

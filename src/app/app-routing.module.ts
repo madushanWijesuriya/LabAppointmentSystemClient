@@ -6,18 +6,30 @@ import { HomeComponent } from './views/patient/home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { staffRoutes } from './views/staff/staff.routing';
+import { LayoutComponent } from './views/staff/layout/layout.component';
+import { PatientLayoutComponent } from './views/patient/patient-layout/patient-layout.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
+  { path: '', component: AppComponent, runGuardsAndResolvers: 'always' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {
-    path: 'patient/home',
-    component: HomeComponent,
+    path: 'patient',
+    component: PatientLayoutComponent,
     canActivate: [AuthGuard, RoleGuard],
     data: { expectedRole: 'Patient' },
+    children: [
+      {
+        path: 'home',
+        component: HomeComponent,
+      },
+    ],
   },
+
   {
     path: 'staff',
+    component: LayoutComponent,
     children: [...staffRoutes],
   },
 ];

@@ -30,6 +30,8 @@ import { ViewAppointmentTestComponent } from './views/staff/technician/view-appo
 import { UpdateAppointmentTestComponent } from './views/staff/technician/update-appointment-test/update-appointment-test.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { NgxEditorModule } from 'ngx-editor';
+import { LayoutComponent } from './views/staff/layout/layout.component';
+import { PatientLayoutComponent } from './views/patient/patient-layout/patient-layout.component';
 export const environment = {
   production: false,
   stripe: {
@@ -55,6 +57,8 @@ export const environment = {
     PaymentFormComponent,
     ViewAppointmentTestComponent,
     UpdateAppointmentTestComponent,
+    LayoutComponent,
+    PatientLayoutComponent,
   ],
   imports: [
     BrowserModule,

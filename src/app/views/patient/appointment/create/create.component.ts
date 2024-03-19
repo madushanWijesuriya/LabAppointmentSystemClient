@@ -37,7 +37,12 @@ export class CreateComponent {
     if (this.appointmentForm.valid) {
       const formData = this.appointmentForm.value;
       const selectedTime = this.timeStringToDouble(formData.time);
+      const date = new Date(this.appointmentForm.get('date')?.value);
       formData.time = selectedTime;
+      let localDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
+      );
+      formData.date = localDate;
       this.service.create(formData).subscribe((response) => {
         this.notificationService.showSuccess('Appointment created');
         this.dialogRef.close(true);

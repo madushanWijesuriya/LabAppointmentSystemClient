@@ -12,7 +12,7 @@ export class NotificationService {
   }
 
   showError(message: string): void {
-    this.showSnackBar(message, 'error-snackbar');
+    this.showSnackBar(message, 'full-red-snackbar');
   }
 
   showWarning(message: string): void {
@@ -21,8 +21,8 @@ export class NotificationService {
 
   private showSnackBar(message: string, panelClass: string): void {
     this.snackBar.open(message, 'Close', {
-      duration: 3000,
-      panelClass: [panelClass],
+      duration: 100000,
+      panelClass: panelClass,
     });
   }
 }

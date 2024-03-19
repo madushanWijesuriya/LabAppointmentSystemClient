@@ -1,20 +1,20 @@
-import { Component, ViewChild, inject, signal } from '@angular/core';
+import { Component, ViewChild, inject, signal, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Editor } from 'ngx-editor';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-
-
+export class AppComponent implements OnInit {
   title = 'lab-appointment-client';
   role = signal('');
   private authService = inject(AuthService);
+  private router = inject(Router);
   constructor() {
-    this.role.set(this.authService.getRolesFromToken());
+    console.log('ssssssssssssssssssss');
   }
 
   handleLoginSuccess(): void {
@@ -24,6 +24,22 @@ export class AppComponent {
   paymentHandler: any = null;
 
   ngOnInit() {
+    this.role.set(this.authService.getRolesFromToken());
+
+    if (this.role() === 'Patient') {
+      console.log(this.role());
+
+      this.router.navigate(['patient/home']);
+    } else if (this.role()) {
+      console.log(this.role());
+
+      this.router.navigate(['staff/appointments']);
+    } else {
+      console.log(this.role());
+
+      this.router.navigate(['login']);
+    }
+
     this.invokeStripe();
   }
 

@@ -23,6 +23,13 @@
         }
 
         <mat-datepicker #datePicker></mat-datepicker>
+        <mat-error
+          *ngIf="
+            appointmentForm.get('date')?.touched &&
+            appointmentForm.get('date')?.hasError('required')
+          "
+          >Date is required</mat-error
+        >
       </mat-form-field>
     </div>
 
@@ -35,6 +42,13 @@
             {{ hour }}
           </mat-option>
         </mat-select>
+        <mat-error
+          *ngIf="
+            appointmentForm.get('time')?.touched &&
+            appointmentForm.get('time')?.hasError('required')
+          "
+          >Time is required</mat-error
+        >
       </mat-form-field>
     </div>
 
@@ -50,6 +64,13 @@
             {{ appStatus.value }}
           </mat-option>
         </mat-select>
+        <mat-error
+          *ngIf="
+            appointmentForm.get('workFlow')?.touched &&
+            appointmentForm.get('workFlow')?.hasError('required')
+          "
+          >Workflow status is required</mat-error
+        >
       </mat-form-field>
     </div>
 
@@ -64,6 +85,13 @@
             {{ status }}
           </mat-option>
         </mat-select>
+        <mat-error
+          *ngIf="
+            appointmentForm.get('status')?.touched &&
+            appointmentForm.get('status')?.hasError('required')
+          "
+          >Appointment status is required</mat-error
+        >
       </mat-form-field>
     </div>
     <!-- Submit Button -->

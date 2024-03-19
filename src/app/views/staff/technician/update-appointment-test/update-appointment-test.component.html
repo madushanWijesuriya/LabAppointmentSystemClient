@@ -15,6 +15,13 @@
           [placeholder]="'Type here...'"
         ></ngx-editor>
       </div>
+      <mat-error
+        *ngIf="
+          appointmentTestForm.get('result')?.touched &&
+          appointmentTestForm.get('result')?.hasError('required')
+        "
+        >At least one test must be selected</mat-error
+      >
     </div>
 
     <button mat-raised-button color="primary" type="submit" class="w-full">

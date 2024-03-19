@@ -14,6 +14,13 @@
             {{ test.name }} - (Rs.{{ test.price }})
           </mat-option>
         </mat-select>
+        <mat-error
+          *ngIf="
+            appointmentForm.get('testIds')?.touched &&
+            appointmentForm.get('testIds')?.hasError('required')
+          "
+          >At least one test must be selected</mat-error
+        >
       </mat-form-field>
     </div>
 

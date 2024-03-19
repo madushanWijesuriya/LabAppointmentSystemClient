@@ -24,3 +24,7 @@ body {
   background-color: #ff9800; /* Orange */
   color: #ffffff; /* White text for contrast */
 }
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background-color: red;
+}

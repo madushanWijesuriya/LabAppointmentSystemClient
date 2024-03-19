@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
+import { TOKEN_KEY } from '../constants/global-constants';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class BaseService {
   };
 
   clearToken(): void {
-    localStorage.removeItem('labAppointmentToken');
+    localStorage.removeItem(TOKEN_KEY);
   }
 
   protected getParams = (oDataParams: any) => {

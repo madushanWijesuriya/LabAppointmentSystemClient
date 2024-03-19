@@ -21,6 +21,10 @@
                   formControlName="userName"
                   class="w-full p-2 border rounded-md"
                 />
+                <mat-error
+                  *ngIf="registrationForm.get('userName')?.errors?.['required']"
+                  >User name is required</mat-error
+                >
               </mat-form-field>
             </div>
             <div>
@@ -31,6 +35,14 @@
                   formControlName="email"
                   class="w-full p-2 border rounded-md"
                 />
+                <mat-error
+                  *ngIf="registrationForm.get('email')?.errors?.['required']"
+                  >Email is required</mat-error
+                >
+                <mat-error
+                  *ngIf="registrationForm.get('email')?.errors?.['email']"
+                  >Please enter a valid email</mat-error
+                >
               </mat-form-field>
             </div>
             <div>
@@ -41,6 +53,10 @@
                   formControlName="phoneNumber"
                   class="w-full p-2 border rounded-md"
                 />
+                <mat-error
+                  *ngIf="registrationForm.get('phoneNumber')?.errors?.['required']"
+                  >Phone Number is required</mat-error
+                >
               </mat-form-field>
             </div>
             <div>
@@ -51,6 +67,10 @@
                   formControlName="nic"
                   class="w-full p-2 border rounded-md"
                 />
+                <mat-error
+                  *ngIf="registrationForm.get('nic')?.errors?.['required']"
+                  >NIC Number is required</mat-error
+                >
               </mat-form-field>
             </div>
             <div>
@@ -61,6 +81,10 @@
                   formControlName="name"
                   class="w-full p-2 border rounded-md"
                 />
+                <mat-error
+                  *ngIf="registrationForm.get('name')?.errors?.['required']"
+                  >Name is required</mat-error
+                >
               </mat-form-field>
             </div>
             <div>
@@ -71,6 +95,10 @@
                   formControlName="address"
                   class="w-full p-2 border rounded-md"
                 />
+                <mat-error
+                  *ngIf="registrationForm.get('address')?.errors?.['required']"
+                  >Address is required</mat-error
+                >
               </mat-form-field>
             </div>
             <div>
@@ -84,6 +112,10 @@
                   <mat-option value="Female">Female</mat-option>
                 </mat-select>
               </mat-form-field>
+              <mat-error
+                *ngIf="registrationForm.get('gender')?.errors?.['required']"
+                >Gender is required</mat-error
+              >
             </div>
             <div>
               <mat-form-field class="w-full">
@@ -94,6 +126,14 @@
                   formControlName="password"
                   class="w-full p-2 border rounded-md"
                 />
+                <mat-error
+                  *ngIf="registrationForm.get('password')?.errors?.['required']"
+                  >Password is required</mat-error
+                >
+                <mat-error
+                  *ngIf="registrationForm.get('password')?.errors?.['minlength']"
+                  >Password must be at least 8 characters</mat-error
+                >
               </mat-form-field>
             </div>
             <div>
@@ -110,9 +150,20 @@
                   [for]="picker"
                 ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error
+                  *ngIf="registrationForm.get('dateOfBirth')?.errors?.['required']"
+                  >Date of birth is required</mat-error
+                >
               </mat-form-field>
             </div>
           </div>
+          <p class="mt-2 text-center text-gray-400 dark:text-gray-400">
+            Already have an account?
+            <a routerLink="/login" class="text-blue-400 dark:text-blue-500"
+              >Login</a
+            >
+          </p>
+
           <button
             mat-raised-button
             color="primary"
