@@ -60,8 +60,6 @@ export class ViewAppointmentTestComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAll(this.id).subscribe(
       (appointmentTests) => {
-        console.log(appointmentTests);
-
         this.dataSource.data = appointmentTests;
       },
       (error) => {
@@ -69,32 +67,6 @@ export class ViewAppointmentTestComponent implements OnInit {
       }
     );
   }
-
-  // viewAppointment(data: any) {
-  //   const ref = this.dialog.open(AppointmentViewComponent, {
-  //     width: '400px',
-  //     data: { appointment: data },
-  //   });
-
-  //   ref.afterClosed().subscribe((result) => {
-  //     if (result) {
-  //       this.ngOnInit();
-  //     }
-  //   });
-  // }
-
-  // assignTest(data: any) {
-  //   const ref = this.dialog.open(AssignTestComponent, {
-  //     width: '400px',
-  //     data: data,
-  //   });
-
-  //   ref.afterClosed().subscribe((result) => {
-  //     if (result) {
-  //       this.ngOnInit();
-  //     }
-  //   });
-  // }
 
   updateTestResult(appTest: any) {
     const ref = this.dialog.open(UpdateAppointmentTestComponent, {

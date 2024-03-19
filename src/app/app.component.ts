@@ -13,9 +13,7 @@ export class AppComponent implements OnInit {
   role = signal('');
   private authService = inject(AuthService);
   private router = inject(Router);
-  constructor() {
-    console.log('ssssssssssssssssssss');
-  }
+  constructor() {}
 
   handleLoginSuccess(): void {
     console.log('Login successful in the child component');
@@ -27,16 +25,10 @@ export class AppComponent implements OnInit {
     this.role.set(this.authService.getRolesFromToken());
 
     if (this.role() === 'Patient') {
-      console.log(this.role());
-
       this.router.navigate(['patient/home']);
     } else if (this.role()) {
-      console.log(this.role());
-
       this.router.navigate(['staff/appointments']);
     } else {
-      console.log(this.role());
-
       this.router.navigate(['login']);
     }
 
@@ -54,7 +46,6 @@ export class AppComponent implements OnInit {
           key: 'pk_test_51OucOgBoaqreuNETZii1F9MkDkR5wckNFigkYdmIvVflw23JL3qgVvbLGzPXCHVmGqO26pKNzKwpIl2Y1uLGChyn00pUbVWe2g',
           locale: 'auto',
           token: function (stripeToken: any) {
-            console.log(stripeToken);
             alert('Payment has been successfull!');
           },
         });

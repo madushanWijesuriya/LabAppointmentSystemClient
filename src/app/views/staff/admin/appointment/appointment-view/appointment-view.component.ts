@@ -113,8 +113,6 @@ export class AppointmentViewComponent implements OnInit {
   }
 
   private timeStringToDouble(timeString: string): number {
-    console.log(timeString);
-
     const [hours, minutes] = timeString.split(':').map(Number);
     return hours + minutes / 60;
   }
