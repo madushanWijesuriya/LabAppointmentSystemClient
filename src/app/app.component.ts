@@ -28,8 +28,6 @@ export class AppComponent implements OnInit {
       this.router.navigate(['patient/home']);
     } else if (this.role()) {
       this.router.navigate(['staff/appointments']);
-    } else {
-      this.router.navigate(['login']);
     }
 
     this.invokeStripe();

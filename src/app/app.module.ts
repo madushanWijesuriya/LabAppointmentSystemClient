@@ -32,6 +32,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
 import { NgxEditorModule } from 'ngx-editor';
 import { LayoutComponent } from './views/staff/layout/layout.component';
 import { PatientLayoutComponent } from './views/patient/patient-layout/patient-layout.component';
+import { LandingComponent } from './views/landing/landing.component';
 export const environment = {
   production: false,
   stripe: {
@@ -59,6 +60,7 @@ export const environment = {
     UpdateAppointmentTestComponent,
     LayoutComponent,
     PatientLayoutComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,

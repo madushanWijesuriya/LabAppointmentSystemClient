@@ -1,17 +1,23 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  inject,
+  ElementRef,
+  signal,
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppointmentService } from '../../../services/appointment.service';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  AppointmentStatus,
-  AppointmentViewComponent,
-} from '../../staff/admin/appointment/appointment-view/appointment-view.component';
+import { AppointmentStatus } from '../../staff/admin/appointment/appointment-view/appointment-view.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { AuthService } from '../../../services/auth.service';
 import { AssignTestComponent } from '../../staff/admin/test/assign-test/assign-test.component';
 import { CreateComponent } from '../appointment/create/create.component';
 import { PaymentFormComponent } from '../../../components/payment-form/payment-form.component';
-
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { Editor } from 'ngx-editor';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -32,13 +38,20 @@ export class HomeComponent {
   appointments = [];
   appointmentStatus = AppointmentStatus;
   role: string;
+  html = '';
+  editor!: Editor;
+  reports: any = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('content') content!: ElementRef;
+  appointmentTestForm!: FormGroup;
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private fb: FormBuilder) {
     this.role = auth.getRolesFromToken();
+    this.editor = new Editor();
 
     this.dataSource = new MatTableDataSource<any>(this.appointments);
   }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -71,6 +84,7 @@ export class HomeComponent {
     this.service.getAll(this.role).subscribe(
       (appointments) => {
         this.dataSource.data = appointments;
+        console.log(appointments);
       },
       (error) => {
         console.error('Error fetching appointments:', error);
@@ -113,7 +127,28 @@ export class HomeComponent {
       data: data,
     });
   }
-  
+
+  downloadReports(appointment: any) {
+    this.appointmentTestForm = this.fb.group({
+      result: new FormControl(
+        JSON.parse(appointment.appointmentTests[1].result)
+      ),
+    });
+
+    html2canvas(this.content.nativeElement)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        console.log('Image Data:', imgData); // Add this line for debugging
+        const pdf = new jsPDF();
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save('example.pdf');
+      })
+      .catch((error) => {
+        console.error('Error generating PDF:', error);
+      });
+  }
 }
-
-

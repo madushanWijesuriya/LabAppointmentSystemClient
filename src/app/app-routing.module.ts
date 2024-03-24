@@ -9,9 +9,10 @@ import { staffRoutes } from './views/staff/staff.routing';
 import { LayoutComponent } from './views/staff/layout/layout.component';
 import { PatientLayoutComponent } from './views/patient/patient-layout/patient-layout.component';
 import { AppComponent } from './app.component';
+import { LandingComponent } from './views/landing/landing.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent, runGuardsAndResolvers: 'always' },
+  { path: '', component: LandingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   {

@@ -26,6 +26,7 @@ export class ListComponent {
     this.service.getAll().subscribe(
       (appointments) => {
         this.dataSource.data = appointments;
+        console.log(appointments);
       },
       (error) => {
         console.error('Error fetching appointments:', error);

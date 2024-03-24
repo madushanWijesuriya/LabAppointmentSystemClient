@@ -4,6 +4,20 @@
   <div
     class="p-4 border-gray-200 border-dashed rounded-lg dark:border-gray-700"
   >
+    <div #content>
+      @if(this.appointmentTestForm) {
+
+      <div [formGroup]="appointmentTestForm" class="NgxEditor__Wrapper">
+        <ngx-editor
+          [editor]="editor"
+          formControlName="result"
+          [placeholder]="'Type here...'"
+        ></ngx-editor>
+      </div>
+
+      }
+    </div>
+
     <button
       (click)="makeAppointment()"
       class="rounded-full bg-green-700 text-white px-4 py-2 mb-5"
@@ -71,6 +85,13 @@
             (click)="pay(appointment)"
           >
             Pay
+          </button>
+          }@else if(appointment.workFlow === appointmentStatus.Paid ) {
+          <button
+            class="rounded-full bg-yellow-500 text-black px-4 py-2 mr-1 sm"
+            (click)="downloadReports(appointment)"
+          >
+            Download reports
           </button>
           }
         </mat-cell>
